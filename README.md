@@ -58,3 +58,25 @@ The application includes a test class (`Test.java`) that verifies key functional
 - Managing sold-out books
 
 To run tests, execute the `Test.java` file in the Test package.
+
+## Test Class Results:
+![2](https://github.com/user-attachments/assets/24d8f8ce-9c31-4782-9b14-afa380ee352a)
+![1](https://github.com/user-attachments/assets/469dddf7-37ff-49b7-8f28-93a1f6c7758d)
+![3](https://github.com/user-attachments/assets/2833c394-f66b-4ff8-9c91-2b11017de7ee)
+
+## Main Class Results:
+![1_withDemo](https://github.com/user-attachments/assets/b4f88738-bbae-4cc8-a30d-20d987320ed9)
+trying to add a demo book
+![1_with_outDatedBooks](https://github.com/user-attachments/assets/01941e92-a858-41c3-bab0-acdaeaf1cb66)
+trying to add an out-dated books
+![1](https://github.com/user-attachments/assets/ac25a8b9-a1b5-46fb-95d3-233280da3cd4)
+adding Paper Book 
+![4](https://github.com/user-attachments/assets/7c7fb6fd-5e20-450f-81b1-b8ab854e1b71)
+view account
+![3_with Ebooks](https://github.com/user-attachments/assets/01dcf381-9984-47f8-8b6f-96f0de504a76)
+checkout with ebook
+![3](https://github.com/user-attachments/assets/16666985-5058-4485-b5c6-db62f0c09627)
+checkout with paper book
+![2](https://github.com/user-attachments/assets/dfd0a480-fd1f-4f81-aaef-8c92808842db)
+view cart
+
