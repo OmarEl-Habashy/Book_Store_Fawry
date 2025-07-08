@@ -2,8 +2,12 @@ package Service;
 import Book.*;
 
 import Customer.Customer;
+import Interfaces.Mailable;
+import Interfaces.Shippable;
 import Shipping.MailService;
 import Shipping.ShipService;
+
+import java.util.List;
 
 public class Checkout {
     private double totalPrice;
@@ -16,8 +20,8 @@ public class Checkout {
         this.totalPrice = 0.0;
         this.cart = cart;
     }
-    public void processCheckout(){
-        if (cart.getItems().isEmpty()){
+    public void processCheckout() {
+        if (cart.getItems().isEmpty()) {
             throw new IllegalStateException("Cart is empty");
         }
 
@@ -31,12 +35,25 @@ public class Checkout {
                     ", but the total amount is " + totalPrice);
         }
 
+        updateInventoryStock(cart.getItems());
+
+        // Process shipping for paper books
+        processShippableItems(cart.getItems());
+        // Process mailing for e-books
+        processMailableItems(cart.getItems());
+
         customer.deductBalance(totalPrice);
-        processEachitem(cart.getItems());
+        System.out.println("** Checkout receipt **");
+        for (Item item : cart.getItems()) {
+            Book book = item.getBook();
+            String type = (book instanceof PaperBook) ? "Paper Book" : "E-Book";
+            System.out.println(item.getQuantity() + "x " + type + ": " + book.getTitle() +
+                    " - $" + item.getTotalPrice());
+        }
         System.out.println("** Checkout successful! **");
         System.out.println("** Thank you for your purchase, " + customer.getName() + "! **");
-
-
+        System.out.println("Total price: " + totalPrice);
+        System.out.println("Your new balance is: " + customer.getBalance() + "\n\n");
     }
 
     private void validateItem(java.util.List<Item> items) {
@@ -56,16 +73,39 @@ public class Checkout {
         }
 
     }
+    private void processShippableItems(List<Item> items) {
+        ShipService shipService = new ShipService(customer.getAddress(), null);
+        List<Shippable> shippableItems = shipService.getShippableItems(items);
+        for (Shippable item : shippableItems) {
+            PaperBook paperBook = (PaperBook) item;
+            paperBook.ship(paperBook, customer.getAddress());
+        }
+    }
 
-    private void processEachitem(java.util.List<Item> items){
-        for(Item item : items) {
-            if(item.getBook() instanceof PaperBook) {
-                ShipService shipService = new ShipService(customer.getAddress(), (PaperBook)item.getBook());
-                shipService.shipPaperBook();
-            } else if(item.getBook() instanceof EBook) {
-                MailService mailService = new MailService(customer.getEmail(),(EBook)item.getBook());
-                mailService.sendEBook();
+    private void processMailableItems(List<Item> items) {
+        MailService mailService = new MailService(customer.getAddress(), null);
+        List<Mailable> mailableItems = mailService.getMailableItems(items);
+        for (Mailable item : mailableItems) {
+            EBook ebook = (EBook) item;
+            ebook.sendWithMail(ebook, customer.getEmail());
+        }
+    }
+
+    private void updateInventoryStock(List<Item> items) {
+        for (Item item : items) {
+            Book book = item.getBook();
+            if (book instanceof PaperBook) {
+                PaperBook paperBook = (PaperBook) book;
+                double currentStock = paperBook.getStock();
+                paperBook.setStock(currentStock - item.getQuantity());
+
+                if (paperBook.getStock() <= 0) {
+                    paperBook.setStock(0);
+                    paperBook.setForSale(false);
+                }
             }
         }
     }
+
+
 }

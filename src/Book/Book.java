@@ -47,6 +47,9 @@ public abstract class Book {
         this.price = price;
     }
 
+    public void setForSale(Boolean forSale) {
+        this.ForSale = forSale;
+    }
     public Boolean isForSale() {
 
         return ForSale && !isOutDated();

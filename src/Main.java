@@ -104,9 +104,21 @@ public class Main {
                     break;
 
                 case 3:
+                    Checkout checkout = new Checkout(customer, cart);
+                    try {
+                        checkout.processCheckout();
+                        cart = new Cart();
+                    } catch (IllegalStateException e) {
+                        System.out.println("Checkout failed: " + e.getMessage());
+                    }
                     break;
 
                 case 4:
+                    System.out.println("** Account Details **");
+                    System.out.println("Name: " + customer.getName() + ",\nBalance: $" + customer.getBalance());
+                    System.out.println("Address: " + customer.getAddress() + ",\nEmail: " + customer.getEmail());
+                    System.out.println("Books in your cart: " + cart.getBooks().size());
+
                     break;
 
                 case 5:
