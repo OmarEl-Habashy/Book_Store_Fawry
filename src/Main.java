@@ -1,7 +1,7 @@
 import Book.*;
+import Customer.Customer;
 import Service.*;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 
 public class Main {
@@ -12,6 +12,8 @@ public class Main {
 
 
         PaperBook ATaleOfTwoCities = new PaperBook("1", "A Tale of Two Cities", "1859", 350, true, 10, true);
+        PaperBook theArtOfWar = new PaperBook("5", "The Art of War", "500 BC", 150, true, 5, false);
+        PaperBook theGreatGatsby = new PaperBook("4", "The Great Gatsby", "2020", 300, true, 20, false);
         EBook digitalMarketing = new EBook("2", "Digital Marketing", "2020", 200, true, "PDF");
         DemoBook demoBook = new DemoBook("3", "Demo Book", "2021");
 
@@ -19,6 +21,8 @@ public class Main {
         inventory.addBook(ATaleOfTwoCities);
         inventory.addBook(digitalMarketing);
         inventory.addBook(demoBook);
+        inventory.addBook(theArtOfWar);
+        inventory.addBook(theGreatGatsby);
 
         Cart cart = new Cart();
 
@@ -77,7 +81,7 @@ public class Main {
                             boolean added = cart.addBook((PaperBook) selectedBook, quantity);
                             if (added)
                                 System.out.println(quantity + " " + selectedBook.getTitle() + "(s) added to cart.");
-                        } else if (selectedBook instanceof EBook) {
+                        } else {
                             boolean added = cart.addBook((EBook) selectedBook, quantity);
                             if (added)
                                 System.out.println(quantity + " " + selectedBook.getTitle() + "(s) added to cart.");
@@ -87,6 +91,16 @@ public class Main {
                     break;
 
                 case 2:
+                    if(cart.getBooks().isEmpty()){
+                        System.out.println("Your cart is empty.");
+                    }
+                    else{
+                        System.out.println("Items in your cart:");
+                        for(Item item : cart.getItems()) {
+                            System.out.println(item.getQuantity() + "x " + item.getBook().getTitle() +
+                                    " - Price: $" + item.getTotalPrice());
+                        }
+                    }
                     break;
 
                 case 3:
