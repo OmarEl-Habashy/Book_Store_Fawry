@@ -1,5 +1,7 @@
 package Book;
 
+import Interfaces.Mailable;
+
 public class EBook extends Book implements Mailable {
     private String FileType;
 
@@ -16,5 +18,9 @@ public class EBook extends Book implements Mailable {
     }
     public boolean isAvailable() {
         return isForSale();
+    }
+    @Override
+    public void sendWithMail(EBook book, String email) {
+        System.out.println("Book store: Sending " + book.getTitle() + " to " + email);
     }
 }

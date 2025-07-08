@@ -48,6 +48,7 @@ public abstract class Book {
     }
 
     public Boolean isForSale() {
+
         return ForSale && !isOutDated();
     }
     public Boolean isOutDated(){

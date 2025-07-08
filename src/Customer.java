@@ -4,10 +4,11 @@ public class Customer {
     private String address;
     private String email;
 
-    public Customer(String name, double balance, String address) {
+    public Customer(String name, double balance, String address, String email) {
         this.name = name;
         this.balance = balance;
         this.address=address;
+        this.email=email;
     }
 
     public void deductBalance(double amount) throws IllegalStateException {

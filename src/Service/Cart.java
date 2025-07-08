@@ -10,9 +10,10 @@ public class Cart {
         this.E_Books = new java.util.ArrayList<>();
     }
 
-    public boolean addPaperBook(PaperBook book, int quantity) {
+    public boolean addBook(PaperBook book, int quantity) {
         if (!book.isAvailable()) {
-            System.out.println("Paper Book " + book.getTitle() + " is out of stock.");
+            System.out.println("Paper Book " + book.getTitle() +
+                    (book.isOutDated() ? " is Outdated" : " is out of stock"));
             return false;
         }
         for (PaperBook existingBook : P_Books) {
@@ -27,9 +28,10 @@ public class Cart {
         return true;
     }
 
-    public boolean addEBook(EBook book, int quantity) {
+    public boolean addBook(EBook book, int quantity) {
         if (!book.isAvailable()) {
-            System.out.println("E-Book " + book.getTitle() + " is out of stock.");
+            System.out.println("E-Book " + book.getTitle() +
+                    (book.isOutDated() ? " is Outdated" : " is out of stock"));
             return false;
         }
         for (EBook existingBook : E_Books) {

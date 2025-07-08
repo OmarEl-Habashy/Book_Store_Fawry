@@ -1,6 +1,8 @@
 package Book;
 
-public class PaperBook extends Book {
+import Interfaces.Shippable;
+
+public class PaperBook extends Book implements Shippable {
     private double Stock;
     private boolean Shipping;
 
@@ -27,6 +29,10 @@ public class PaperBook extends Book {
         return Stock > 0 && isForSale();
     }
 
+    @Override
+    public void ship(PaperBook book, String address){
+        System.out.println("Book store: Sending " + book.getTitle() + " to " + address);
+    }
 
 
 }
