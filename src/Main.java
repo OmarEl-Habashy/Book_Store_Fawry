@@ -12,7 +12,7 @@ public class Main {
 
 
         PaperBook ATaleOfTwoCities = new PaperBook("1", "A Tale of Two Cities", "1859", 350, true, 10, true);
-        PaperBook theArtOfWar = new PaperBook("5", "The Art of War", "500 BC", 150, true, 5, false);
+        PaperBook theArtOfWar = new PaperBook("5", "The Art of War", "-500", 150, true, 5, false);
         PaperBook theGreatGatsby = new PaperBook("4", "The Great Gatsby", "2020", 300, true, 20, false);
         EBook digitalMarketing = new EBook("2", "Digital Marketing", "2020", 200, true, "PDF");
         DemoBook demoBook = new DemoBook("3", "Demo Book", "2021");
