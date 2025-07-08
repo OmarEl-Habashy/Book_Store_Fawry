@@ -1,6 +1,4 @@
-Here are some suggestions to make your README more appealing to a software engineer:
 
----
 
 # 📚 Book Store Fawry - Java Console Application
 
